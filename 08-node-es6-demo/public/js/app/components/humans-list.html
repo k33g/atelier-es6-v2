@@ -1,0 +1,26 @@
+
+<polymer-element name="humans-list">
+
+  <template>
+
+    <template bind="{{human}}">
+      <form onsubmit="return false">
+        <input type="text" name="firstName" value="{{firstName}}"/>
+        <input type="text" name="lastName"  value="{{lastName}}"/>
+        <button on-click="{{add}}">Add</button>
+      </form>
+    </template>
+
+    <ul>
+      <template repeat="{{humans}}">
+        <li>{{id()}} - {{firstName}} {{lastName}}</li>
+      </template>
+    </ul>
+  </template>
+
+  <script>
+    System.import('humans-list').catch(function (e) {console.error(e);});
+    //System.import('../../js/app/components/humans-list');
+  </script>
+
+</polymer-element>

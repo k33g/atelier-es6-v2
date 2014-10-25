@@ -1,0 +1,1194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#atelier-es6"><span class="toc-section-number">1</span> Atelier ES6</a></li>
+<li><a href="#es6---partie-1"><span class="toc-section-number">2</span> ES6 - Partie 1</a><ul>
+<li><a href="#ce-que-nous-attendions-tous-les-classes"><span class="toc-section-number">2.1</span> Ce que nous attendions tous: les Classes</a></li>
+<li><a href="#bien-sûr-on-peut-hériter"><span class="toc-section-number">2.2</span> Bien sûr, on peut &quot;hériter&quot;</a></li>
+<li><a href="#import-export-ou-la-modularisation-facile"><span class="toc-section-number">2.3</span> Import / Export: ou la modularisation facile</a><ul>
+<li><a href="#classe-animal-dans-animal.js"><span class="toc-section-number">2.3.1</span> Classe Animal dans <code>Animal.js</code></a></li>
+<li><a href="#classe-dog-dans-dog.js"><span class="toc-section-number">2.3.2</span> Classe Dog dans <code>Dog.js</code></a></li>
+<li><a href="#utilisation-de-dog-dans-main.js"><span class="toc-section-number">2.3.3</span> Utilisation de Dog dans <code>main.js</code></a></li>
+</ul></li>
+<li><a href="#fat-arrow"><span class="toc-section-number">2.4</span> Fat Arrow <code>=&gt;</code></a><ul>
+<li><a href="#fat-arrow-lexical-this-binding"><span class="toc-section-number">2.4.1</span> Fat Arrow + Lexical <code>this</code> binding</a></li>
+</ul></li>
+<li><a href="#let-versus-var"><span class="toc-section-number">2.5</span> <code>let</code> versus <code>var</code></a><ul>
+<li><a href="#var"><span class="toc-section-number">2.5.1</span> <code>var</code></a></li>
+<li><a href="#let-cest-plus-propre"><span class="toc-section-number">2.5.2</span> <code>let</code> : c'est plus propre</a></li>
+</ul></li>
+<li><a href="#exécuter-du-code-es6-préparation-de-index.html"><span class="toc-section-number">2.6</span> Exécuter du code ES6: Préparation de <code>index.html</code></a></li>
+</ul></li>
+<li><a href="#es6---exercice-1-models"><span class="toc-section-number">3</span> ES6 - Exercice 1: Models</a><ul>
+<li><a href="#le-minimum-pour-commencer"><span class="toc-section-number">3.1</span> Le minimum pour commencer</a><ul>
+<li><a href="#côté-serveur"><span class="toc-section-number">3.1.1</span> Côté serveur</a></li>
+<li><a href="#côté-client"><span class="toc-section-number">3.1.2</span> Côté client</a></li>
+</ul></li>
+<li><a href="#exercice"><span class="toc-section-number">3.2</span> Exercice</a></li>
+</ul></li>
+<li><a href="#correction"><span class="toc-section-number">4</span> Correction</a><ul>
+<li><a href="#model.js"><span class="toc-section-number">4.1</span> <code>Model.js</code></a></li>
+<li><a href="#human.js"><span class="toc-section-number">4.2</span> <code>Human.js</code></a></li>
+</ul></li>
+<li><a href="#es6---partie-2"><span class="toc-section-number">5</span> ES6 - Partie 2</a></li>
+<li><a href="#es6---exercice-2-collections"><span class="toc-section-number">6</span> ES6 - Exercice 2: Collections</a><ul>
+<li><a href="#exercice-1"><span class="toc-section-number">6.1</span> Exercice</a></li>
+</ul></li>
+<li><a href="#correction-1"><span class="toc-section-number">7</span> Correction</a><ul>
+<li><a href="#collection.js"><span class="toc-section-number">7.1</span> <code>Collection.js</code></a></li>
+<li><a href="#humans.js"><span class="toc-section-number">7.2</span> <code>Humans.js</code></a></li>
+</ul></li>
+<li><a href="#es6---partie-3"><span class="toc-section-number">8</span> ES6 - Partie 3</a><ul>
+<li><a href="#exercice-2"><span class="toc-section-number">8.1</span> Exercice</a></li>
+</ul></li>
+<li><a href="#correction-2"><span class="toc-section-number">9</span> Correction</a><ul>
+<li><a href="#observable.js"><span class="toc-section-number">9.1</span> <code>Observable.js</code></a></li>
+<li><a href="#model.js-1"><span class="toc-section-number">9.2</span> <code>Model.js</code></a></li>
+<li><a href="#collection.js-1"><span class="toc-section-number">9.3</span> <code>Collection.js</code></a></li>
+</ul></li>
+<li><a href="#es6---partie-4"><span class="toc-section-number">10</span> ES6 - Partie 4</a><ul>
+<li><a href="#interpolations-de-chaînes"><span class="toc-section-number">10.1</span> Interpolations de chaînes</a><ul>
+<li><a href="#template-strings"><span class="toc-section-number">10.1.1</span> Template strings</a></li>
+<li><a href="#multiline-strings"><span class="toc-section-number">10.1.2</span> Multiline strings</a></li>
+<li><a href="#tagged-template-strings"><span class="toc-section-number">10.1.3</span> Tagged template strings</a></li>
+</ul></li>
+<li><a href="#mixin-dobjets"><span class="toc-section-number">10.2</span> Mixin d'objets</a></li>
+<li><a href="#array.from"><span class="toc-section-number">10.3</span> Array.from</a></li>
+</ul></li>
+<li><a href="#es6---exercice-4-views"><span class="toc-section-number">11</span> ES6 - Exercice 4: Views</a><ul>
+<li><a href="#remarque-selector.js"><span class="toc-section-number">11.1</span> Remarque : <code>selector.js</code></a></li>
+<li><a href="#exercice-3"><span class="toc-section-number">11.2</span> Exercice</a></li>
+</ul></li>
+<li><a href="#correction-3"><span class="toc-section-number">12</span> Correction</a><ul>
+<li><a href="#view.js"><span class="toc-section-number">12.1</span> <code>View.js</code></a></li>
+<li><a href="#title.js"><span class="toc-section-number">12.2</span> <code>Title.js</code></a></li>
+<li><a href="#humanslist.js"><span class="toc-section-number">12.3</span> <code>HumansList.js</code></a></li>
+</ul></li>
+<li><a href="#es6---partie-5"><span class="toc-section-number">13</span> ES6 - Partie 5</a><ul>
+<li><a href="#les-promises"><span class="toc-section-number">13.1</span> Les Promises!</a></li>
+</ul></li>
+<li><a href="#es6---exercice-5-request"><span class="toc-section-number">14</span> ES6 - Exercice 5: Request</a><ul>
+<li><a href="#remarque-request.js"><span class="toc-section-number">14.1</span> Remarque : <code>Request.js</code></a></li>
+<li><a href="#exercice-4"><span class="toc-section-number">14.2</span> Exercice</a></li>
+</ul></li>
+<li><a href="#correction-4"><span class="toc-section-number">15</span> Correction</a><ul>
+<li><a href="#model.js-2"><span class="toc-section-number">15.1</span> <code>Model.js</code></a></li>
+<li><a href="#collection.js-2"><span class="toc-section-number">15.2</span> <code>Collection.js</code></a></li>
+</ul></li>
+<li><a href="#es6---partie-6"><span class="toc-section-number">16</span> ES6 - Partie 6</a><ul>
+<li><a href="#map"><span class="toc-section-number">16.1</span> Map</a></li>
+<li><a href="#remarque"><span class="toc-section-number">16.2</span> Remarque</a></li>
+</ul></li>
+<li><a href="#es6---exercice-6-router"><span class="toc-section-number">17</span> ES6 - Exercice 6: Router</a><ul>
+<li><a href="#exercice-5"><span class="toc-section-number">17.1</span> Exercice</a></li>
+</ul></li>
+<li><a href="#correction-5"><span class="toc-section-number">18</span> Correction</a><ul>
+<li><a href="#router.js"><span class="toc-section-number">18.1</span> <code>Router.js</code></a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="atelier-es6"><a href="#atelier-es6"><span class="header-section-number">1</span> Atelier ES6</a></h1>
+<p>Création d'un framework MVC en ES6 Décrire tout ce que nous allons faire Bien sûr nous ne verrons pas tout si nous n'arrivons pas au bout : pinguer moi ici : ph.charriere@gmail.com</p>
+<p>Notre framework s'appelera &quot;skeleton&quot;</p>
+<h1 id="es6---partie-1"><a href="#es6---partie-1"><span class="header-section-number">2</span> ES6 - Partie 1</a></h1>
+<p><em>Ou, tout ce dont vous avez besoin pour le 1er exercice.</em></p>
+<h2 id="ce-que-nous-attendions-tous-les-classes"><a href="#ce-que-nous-attendions-tous-les-classes"><span class="header-section-number">2.1</span> Ce que nous attendions tous: les Classes</a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Dog {
+  <span class="fu">constructor</span> (name=<span class="st">&quot;cookie&quot;</span>) { <span class="co">/* mot-clé constructor + valeurs par défaut */</span>
+    <span class="kw">this</span>.<span class="fu">name</span> = name; <span class="co">/* propriétés définies dans le constructeur */</span>
+  }
+  <span class="fu">wouaf</span> () { <span class="co">/* pas de mot-clé function */</span>
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="kw">this</span>.<span class="fu">name</span> + <span class="st">&quot;: wouaf! wouaf!&quot;</span>);
+  }
+}
+
+<span class="kw">let</span> wolf = <span class="kw">new</span> <span class="fu">Dog</span>();
+<span class="ot">wolf</span>.<span class="fu">wouaf</span>()</code></pre>
+<h2 id="bien-sûr-on-peut-hériter"><a href="#bien-sûr-on-peut-hériter"><span class="header-section-number">2.2</span> Bien sûr, on peut &quot;hériter&quot;</a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Animal {
+  <span class="fu">constructor</span>(name) {
+    <span class="kw">this</span>.<span class="fu">name</span> = name;
+  }
+}
+
+<span class="kw">class</span> Dog <span class="kw">extends</span> Animal {
+  <span class="fu">constructor</span> (name=<span class="st">&quot;cookie&quot;</span>) {
+    <span class="kw">super</span>(name) <span class="co">/* on appelle le constructeur de la classe mère */</span>
+  }
+  <span class="fu">wouaf</span> () {
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="kw">this</span>.<span class="fu">name</span> + <span class="st">&quot;: wouaf! wouaf!&quot;</span>);
+  }
+}
+
+<span class="kw">let</span> wolf = <span class="kw">new</span> <span class="fu">Dog</span>();
+<span class="ot">wolf</span>.<span class="fu">wouaf</span>()</code></pre>
+<h2 id="import-export-ou-la-modularisation-facile"><a href="#import-export-ou-la-modularisation-facile"><span class="header-section-number">2.3</span> Import / Export: ou la modularisation facile</a></h2>
+<h3 id="classe-animal-dans-animal.js"><a href="#classe-animal-dans-animal.js"><span class="header-section-number">2.3.1</span> Classe Animal dans <code>Animal.js</code></a></h3>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Animal {
+  <span class="fu">constructor</span>(name) {
+    <span class="kw">this</span>.<span class="fu">name</span> = name;
+  }
+}
+<span class="kw">export</span> <span class="kw">default</span> Animal;</code></pre>
+<h3 id="classe-dog-dans-dog.js"><a href="#classe-dog-dans-dog.js"><span class="header-section-number">2.3.2</span> Classe Dog dans <code>Dog.js</code></a></h3>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">import</span> Animal from <span class="st">&#39;./Animal&#39;</span>; <span class="co">/* pas d&#39;extension .js */</span>
+
+<span class="kw">class</span> Dog <span class="kw">extends</span> Animal {
+  <span class="fu">constructor</span> (name=<span class="st">&quot;cookie&quot;</span>) {
+    <span class="kw">super</span>(name) <span class="co">/* on appelle le constructeur de la classe mère */</span>
+  }
+  <span class="fu">wouaf</span> () {
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="kw">this</span>.<span class="fu">name</span> + <span class="st">&quot;: wouaf! wouaf!&quot;</span>);
+  }
+}
+<span class="kw">export</span> <span class="kw">default</span> Dog;</code></pre>
+<h3 id="utilisation-de-dog-dans-main.js"><a href="#utilisation-de-dog-dans-main.js"><span class="header-section-number">2.3.3</span> Utilisation de Dog dans <code>main.js</code></a></h3>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">import</span> Dog from <span class="st">&#39;./Dog&#39;</span>
+<span class="kw">let</span> wolf = <span class="kw">new</span> <span class="fu">Dog</span>();
+<span class="ot">wolf</span>.<span class="fu">wouaf</span>()    </code></pre>
+<h2 id="fat-arrow"><a href="#fat-arrow"><span class="header-section-number">2.4</span> Fat Arrow <code>=&gt;</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/* Avant */</span>
+<span class="kw">var</span> sayHello = <span class="kw">function</span>(name) { <span class="kw">return</span> <span class="st">&quot;hello &quot;</span> + name; }
+
+<span class="co">/* Après */</span>
+<span class="kw">var</span> sayHello = (name) =&gt; <span class="st">&quot;hello &quot;</span> + name
+<span class="co">// ou var sayHello = (name) =&gt; { return &quot;hello &quot; + name; }</span>
+<span class="fu">sayHello</span>(<span class="st">&quot;Bob Morane&quot;</span>);</code></pre>
+<p>Remarques:</p>
+<ul>
+<li>pas &quot;newable&quot;</li>
+<li>pas d'objet <code>arguments</code>, à la place : &quot;rest parameters&quot;</li>
+</ul>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> sayHello = (...<span class="fu">people</span>) =&gt; <span class="ot">people</span>.<span class="fu">forEach</span>((somebody) =&gt; <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;Hello&quot;</span>, somebody));
+
+<span class="fu">sayHello</span>(<span class="st">&quot;Bob Morane&quot;</span>, <span class="st">&quot;John Doe&quot;</span>, <span class="st">&quot;Jane Doe&quot;</span>);</code></pre>
+<h3 id="fat-arrow-lexical-this-binding"><a href="#fat-arrow-lexical-this-binding"><span class="header-section-number">2.4.1</span> Fat Arrow + Lexical <code>this</code> binding</a></h3>
+<p>La valeur de <code>this</code> est déterminée par l'endroit où se trouve la &quot;Arrow function&quot;</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/* Avant */</span>
+<span class="kw">function</span> <span class="fu">Animal</span>(friends) {
+  <span class="kw">this</span>.<span class="fu">friends</span> = friends;
+  <span class="kw">this</span>.<span class="fu">hello</span> = <span class="kw">function</span>(friend) {
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;hello &quot;</span> + friend);
+  }
+  <span class="kw">this</span>.<span class="fu">helloAll</span> = <span class="kw">function</span>() {
+    <span class="kw">this</span>.<span class="ot">friends</span>.<span class="fu">forEach</span>(<span class="kw">function</span>(friend) {
+      <span class="kw">this</span>.<span class="fu">hello</span>(friend); <span class="co">/* error */</span>
+    });
+  }
+}
+
+<span class="kw">var</span> wolf = <span class="kw">new</span> <span class="fu">Animal</span>([<span class="st">&quot;rox&quot;</span>, <span class="st">&quot;rookie&quot;</span>]);
+<span class="ot">wolf</span>.<span class="fu">helloAll</span>();
+
+
+<span class="co">/* Correction : bind */</span>
+<span class="kw">function</span> <span class="fu">Animal</span>(friends) {
+  <span class="kw">this</span>.<span class="fu">friends</span> = friends;
+  <span class="kw">this</span>.<span class="fu">hello</span> = <span class="kw">function</span>(friend) {
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;hello &quot;</span> + friend);
+  }
+  <span class="kw">this</span>.<span class="fu">helloAll</span> = <span class="kw">function</span>() {
+    <span class="kw">this</span>.<span class="ot">friends</span>.<span class="fu">forEach</span>(<span class="kw">function</span>(friend) {
+      <span class="kw">this</span>.<span class="fu">hello</span>(friend);
+    }.<span class="fu">bind</span>(<span class="kw">this</span>)); <span class="co">// ou var that = this</span>
+  }
+}
+
+<span class="kw">var</span> wolf = <span class="kw">new</span> <span class="fu">Animal</span>([<span class="st">&quot;rox&quot;</span>, <span class="st">&quot;rookie&quot;</span>]);
+<span class="ot">wolf</span>.<span class="fu">helloAll</span>();
+
+
+<span class="co">/* Après */</span>
+<span class="kw">class</span> Animal {
+  <span class="fu">constructor</span> (friends=[]) {
+    <span class="kw">this</span>.<span class="fu">friends</span> = friends;
+  }
+  <span class="fu">hello</span>(friend) { <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;hello &quot;</span> + friend); }
+  <span class="fu">helloAll</span>() {
+    <span class="kw">this</span>.<span class="ot">friends</span>.<span class="fu">forEach</span>((friend) =&gt; <span class="kw">this</span>.<span class="fu">hello</span>(friend));
+  }
+}</code></pre>
+<h2 id="let-versus-var"><a href="#let-versus-var"><span class="header-section-number">2.5</span> <code>let</code> versus <code>var</code></a></h2>
+<h3 id="var"><a href="#var"><span class="header-section-number">2.5.1</span> <code>var</code></a></h3>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> bob = {
+  <span class="dt">firstName</span>:<span class="st">&quot;Bob&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Morane&quot;</span>
+}
+
+<span class="kw">var</span> bob = { <span class="dt">foo</span>:<span class="st">&quot;foo&quot;</span>}</code></pre>
+<h3 id="let-cest-plus-propre"><a href="#let-cest-plus-propre"><span class="header-section-number">2.5.2</span> <code>let</code> : c'est plus propre</a></h3>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> bob = {
+  <span class="dt">firstName</span>:<span class="st">&quot;Bob&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Morane&quot;</span>
+}
+
+<span class="kw">let</span> bob = { <span class="dt">foo</span>:<span class="st">&quot;foo&quot;</span>} <span class="co">/* Duplicate declaration, bob */</span></code></pre>
+<h2 id="exécuter-du-code-es6-préparation-de-index.html"><a href="#exécuter-du-code-es6-préparation-de-index.html"><span class="header-section-number">2.6</span> Exécuter du code ES6: Préparation de <code>index.html</code></a></h2>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;node_modules/traceur/bin/traceur.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+<span class="kw">&lt;script&gt;</span>
+  <span class="ot">traceur</span>.<span class="ot">options</span>.<span class="fu">experimental</span> = <span class="kw">true</span>;
+<span class="kw">&lt;/script&gt;</span>
+
+<span class="kw">&lt;script&gt;</span>
+<span class="er">  System.import(&#39;js/main&#39;).catch(function (e) {console.error(e);});</span>
+<span class="kw">&lt;/script&gt;</span></code></pre>
+<p><strong>PS</strong>: il y a d'autres méthodes, mais pour apprendre, c'est la plus simple</p>
+<h1 id="es6---exercice-1-models"><a href="#es6---exercice-1-models"><span class="header-section-number">3</span> ES6 - Exercice 1: Models</a></h1>
+<h2 id="le-minimum-pour-commencer"><a href="#le-minimum-pour-commencer"><span class="header-section-number">3.1</span> Le minimum pour commencer</a></h2>
+<h3 id="côté-serveur"><a href="#côté-serveur"><span class="header-section-number">3.1.1</span> Côté serveur</a></h3>
+<ul>
+<li>on fonctionne en &quot;mode http&quot;, il nous faut donc un serveur http, j'ai pris node + express</li>
+<li>j'utilise NeDb pour &quot;simuler&quot; une base de données, c'est un MongoDb-like avec du fichier plat</li>
+<li>j'ai besoin de npm</li>
+</ul>
+<h4 id="package.json"><a href="#package.json"><span class="header-section-number">3.1.1.1</span> <code>package.json</code></a></h4>
+<pre><code>{
+  &quot;name&quot;: &quot;es6&quot;,
+  &quot;description&quot;: &quot;es6&quot;,
+  &quot;version&quot;: &quot;0.0.0&quot;,
+  &quot;dependencies&quot;: {
+    &quot;body-parser&quot;: &quot;1.0.2&quot;,
+    &quot;express&quot;: &quot;4.1.x&quot;,
+    &quot;nedb&quot;: &quot;0.10.5&quot;
+  }
+}</code></pre>
+<p>Et je vous ai préparé un ficihier <code>app.js</code> avec les API REST qui vont bien pour faire du CRUD</p>
+<h3 id="côté-client"><a href="#côté-client"><span class="header-section-number">3.1.2</span> Côté client</a></h3>
+<p>Notre webapp sera dans le répertoire <code>/public</code></p>
+<p>Elle sera composée de:</p>
+<ul>
+<li><code>index.html</code> dans <code>/public</code>, déjà préparée pour vous</li>
+<li><code>main.js</code> dans <code>public/js</code> qui contiendra le code principal de notre application (essentiellement des tests qui sont déjà <strong>codés</strong>)</li>
+<li><code>Model.js</code> dans <code>public/js/skeleton</code> : <strong>vous allez devoir le coder</strong> pour que les tests fonctionnent</li>
+<li><code>Human.js</code> dans <code>public/js/app/models</code> : <strong>vous allez devoir le coder</strong> pour que les tests fonctionnent</li>
+</ul>
+<p>Là aussi j'ai besoin de npm pour installer les dépendances :</p>
+<ul>
+<li><strong>Traceur</strong>, qui va donc nous permettre d'exécuter du code ES6 (nous allons faire de la &quot;transpilation online&quot;)</li>
+<li><strong>QUnit</strong>, pour faire nos tests unitaires</li>
+</ul>
+<h4 id="package.json-1"><a href="#package.json-1"><span class="header-section-number">3.1.2.1</span> <code>package.json</code></a></h4>
+<pre><code>{
+  &quot;name&quot;: &quot;es6&quot;,
+  &quot;description&quot;: &quot;es6 formation&quot;,
+  &quot;author&quot;: &quot;@k33g_org&quot;,
+  &quot;license&quot;: &quot;MIT&quot;,
+  &quot;dependencies&quot;: {
+    &quot;traceur&quot;: &quot;0.0.65&quot;
+  },
+  &quot;devDependencies&quot;: {
+    &quot;qunitjs&quot;: &quot;^1.15.0&quot;
+  }
+}</code></pre>
+<h2 id="exercice"><a href="#exercice"><span class="header-section-number">3.2</span> Exercice</a></h2>
+<p>Créer nos 1ers modèles</p>
+<ul>
+<li><code>public/js/skeleton/Model.js</code></li>
+<li><code>public/js/app/models/Human.js</code></li>
+</ul>
+<p><strong>Remarque</strong>: les spécifications sont décrites dans les fichiers</p>
+<pre><code>cd 01-models
+node app.js
+http://localhost:3000</code></pre>
+<h1 id="correction"><a href="#correction"><span class="header-section-number">4</span> Correction</a></h1>
+<h2 id="model.js"><a href="#model.js"><span class="header-section-number">4.1</span> <code>Model.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/*--- model ---*/</span>
+
+<span class="co">/* === Spécifications ===</span>
+<span class="co">une classe Model</span>
+
+<span class="co">Paramètres du constructeur:</span>
+
+<span class="co">- fields, valeur par défaut {}, contiendra les &quot;champs&quot; du model, ex: {firstName:&quot;Bob&quot;, lastName:&quot;Morane&quot;}</span>
+<span class="co">- observers, valeur par défaut []</span>
+
+<span class="co">Propriétés:</span>
+
+<span class="co">- fields : initialisé par le paramètre correspondant du constructeur</span>
+<span class="co">- observers : initialisé par le paramètre correspondant du constructeur</span>
+
+<span class="co">Méthodes:</span>
+
+<span class="co">- addObserver (observer)</span>
+<span class="co">- notifyObservers (context)</span>
+<span class="co">- get (fieldName), va lire la valeur d&#39;un champ dans fields</span>
+<span class="co">- set (fieldName, value), va modifier la valeur d&#39;un champ dans fields</span>
+<span class="co">- toString (), retourne une représentation json de fields</span>
+
+<span class="co">un observer est juste un objet avec une méthode update</span>
+<span class="co">donc notifyObservers execute la méthode update de tous les observers avec context en paramètre</span>
+
+<span class="co">*/</span>
+
+<span class="kw">class</span> Model {
+  <span class="fu">constructor</span> (fields={}, observers=[]) {
+    <span class="kw">this</span>.<span class="fu">fields</span> = fields;
+    <span class="kw">this</span>.<span class="fu">observers</span> = observers;
+  }
+
+  <span class="fu">addObserver</span> (observer) {
+    <span class="kw">this</span>.<span class="ot">observers</span>.<span class="fu">push</span>(observer);
+  }
+
+  <span class="fu">notifyObservers</span> (context) {
+    <span class="kw">this</span>.<span class="ot">observers</span>.<span class="fu">forEach</span>((observer) =&gt; {
+      <span class="ot">observer</span>.<span class="fu">update</span>(context)
+    })
+  }
+
+  <span class="fu">get</span> (fieldName) {
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">fields</span>[fieldName];
+  }
+
+  <span class="fu">set</span> (fieldName, value) {
+    <span class="kw">this</span>.<span class="fu">fields</span>[fieldName] = value;
+    <span class="kw">return</span> <span class="kw">this</span>;
+  }
+
+  <span class="fu">toString</span> () {
+    <span class="kw">return</span> <span class="ot">JSON</span>.<span class="fu">stringify</span>(<span class="kw">this</span>.<span class="fu">fields</span>)
+  }
+
+}
+
+<span class="kw">export</span> <span class="kw">default</span> Model;</code></pre>
+<h2 id="human.js"><a href="#human.js"><span class="header-section-number">4.2</span> <code>Human.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/* === Spécifications ===</span>
+<span class="co"> une classe Human qui hérite de Model</span>
+<span class="co"> </span>
+<span class="co"> Paramètres du constructeur:</span>
+
+<span class="co"> - fields, valeur par défaut {firstName:&quot;John&quot;, lastName:&quot;Doe&quot;}, </span>
+<span class="co"> </span>
+<span class="co"> Propriétés:</span>
+<span class="co"> </span>
+<span class="co"> - initialiser la propriété fields de la classe mère avec le paramètre du constructeur</span>
+<span class="co"> </span>
+<span class="co"> Méthodes:</span>
+
+<span class="co"> - sans objet</span>
+
+<span class="co"> */</span>
+<span class="kw">import</span> Model from <span class="st">&#39;../../skeleton/Model&#39;</span>;
+
+<span class="kw">class</span> Human  <span class="kw">extends</span> Model {
+  <span class="fu">constructor</span> (fields = {<span class="dt">firstName</span>:<span class="st">&quot;John&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Doe&quot;</span>}) {
+    <span class="co">//superclass&#39;s constructor invocation</span>
+    <span class="kw">super</span>(fields);
+
+  }
+}
+
+<span class="kw">export</span> <span class="kw">default</span> Human;</code></pre>
+<h1 id="es6---partie-2"><a href="#es6---partie-2"><span class="header-section-number">5</span> ES6 - Partie 2</a></h1>
+<p><em>RAS: même chose que pour la partie 1.</em></p>
+<h1 id="es6---exercice-2-collections"><a href="#es6---exercice-2-collections"><span class="header-section-number">6</span> ES6 - Exercice 2: Collections</a></h1>
+<h2 id="exercice-1"><a href="#exercice-1"><span class="header-section-number">6.1</span> Exercice</a></h2>
+<p>Créer notre 1ère collection :</p>
+<ul>
+<li><code>public/js/skeleton/Collection.js</code></li>
+<li><code>public/js/app/models/Humans.js</code></li>
+</ul>
+<p><strong>Remarque</strong>: les spécifications sont décrites dans les fichiers</p>
+<pre><code>cd 02-collections
+node app.js
+http://localhost:3000</code></pre>
+<h1 id="correction-1"><a href="#correction-1"><span class="header-section-number">7</span> Correction</a></h1>
+<h2 id="collection.js"><a href="#collection.js"><span class="header-section-number">7.1</span> <code>Collection.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/*--- collection ---*/</span>
+
+<span class="co">/* === Spécifications ===</span>
+<span class="co"> une classe Collection</span>
+
+<span class="co"> Paramètres du constructeur:</span>
+
+<span class="co"> - model : ce sera le type de la collection (une classe qui héritera de Model), pas de valeur par défaut</span>
+<span class="co"> - models : un tableau, contiendra les instances de modèles, valeur par défaut : []</span>
+<span class="co"> - observers, valeur par défaut []</span>
+
+<span class="co"> Propriétés:</span>
+
+<span class="co"> - model : initialisé par le paramètre correspondant du constructeur</span>
+<span class="co"> - models : initialisé par le paramètre correspondant du constructeur</span>
+<span class="co"> - observers : initialisé par le paramètre correspondant du constructeur</span>
+
+<span class="co"> Méthodes:</span>
+
+<span class="co"> - addObserver (observer)</span>
+<span class="co"> - notifyObservers (context)</span>
+<span class="co"> - toString (), retourne une représentation json de la propriété models</span>
+<span class="co"> - add (model), ajoute un model à models et notifie les observers avec un &quot;contexte&quot; égal à {event: &quot;add&quot;, model: model}</span>
+<span class="co"> - each (callbck) : parcourir les models et exécuter callbck pour chacun (et passer le modèle en paramètre à callbck)</span>
+<span class="co"> - filter (callbck) : retourner un tableau de modèle filtré selon callbck</span>
+<span class="co"> - size () : retourner le nombre de modèles dans la collection</span>
+<span class="co"> </span>
+<span class="co"> un observer est juste un objet avec une méthode update</span>
+<span class="co"> donc notifyObservers execute la méthode update de tous les observers avec context en paramètre</span>
+
+<span class="co"> */</span>
+
+
+<span class="kw">class</span> Collection {
+  <span class="fu">constructor</span> (model, models = [], observers = []) {
+    <span class="kw">this</span>.<span class="fu">model</span> = model;
+    <span class="kw">this</span>.<span class="fu">models</span> = models;
+    <span class="kw">this</span>.<span class="fu">observers</span> = observers;
+  }
+
+  <span class="fu">toString</span> () {
+    <span class="kw">return</span> <span class="ot">JSON</span>.<span class="fu">stringify</span>(<span class="kw">this</span>.<span class="fu">models</span>);
+  }
+
+  <span class="fu">addObserver</span> (observer) {
+    <span class="kw">this</span>.<span class="ot">observers</span>.<span class="fu">push</span>(observer);
+  }
+
+  <span class="fu">notifyObservers</span> (context) {
+    <span class="kw">this</span>.<span class="ot">observers</span>.<span class="fu">forEach</span>((observer) =&gt; {
+      <span class="ot">observer</span>.<span class="fu">update</span>(context)
+    })
+  }
+
+  <span class="fu">add</span> (model) {
+    <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">push</span>(model);
+    <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;add&quot;</span>, <span class="dt">model</span>: model});
+    <span class="kw">return</span> <span class="kw">this</span>;
+  }
+
+  <span class="fu">each</span> (callbck) {
+    <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">forEach</span>(callbck)
+  }
+
+  <span class="fu">filter</span> (callbck) {
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">filter</span>(callbck)
+  }
+
+  <span class="fu">size</span> () { <span class="kw">return</span> <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">length</span>; }
+
+}
+
+<span class="kw">export</span> <span class="kw">default</span> Collection;</code></pre>
+<h2 id="humans.js"><a href="#humans.js"><span class="header-section-number">7.2</span> <code>Humans.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/* === Spécifications ===</span>
+<span class="co">une classe Humans qui hérite de Collection</span>
+
+<span class="co">Paramètres du constructeur:</span>
+
+<span class="co">- humans, un tableau de modèles</span>
+
+<span class="co">Propriétés:</span>
+
+<span class="co">- initialiser la propriété model de la classe mère avec le type Human</span>
+<span class="co">- initialiser la propriété models de la classe mère avec le paramètre humans du constructeur</span>
+
+<span class="co">Méthodes:</span>
+
+<span class="co">- sans objet</span>
+<span class="co">*/</span>
+
+<span class="kw">import</span> Collection from <span class="st">&#39;../../skeleton/Collection&#39;</span>;
+<span class="kw">import</span> Human from <span class="st">&#39;./Human&#39;</span>;
+
+<span class="kw">class</span> Humans <span class="kw">extends</span> Collection{
+
+  <span class="fu">constructor</span> (humans) {
+    <span class="kw">super</span>(Human,humans);
+  }
+}
+
+<span class="kw">export</span> <span class="kw">default</span> Humans;</code></pre>
+<h1 id="es6---partie-3"><a href="#es6---partie-3"><span class="header-section-number">8</span> ES6 - Partie 3</a></h1>
+<p><em>RAS: même chose que pour la partie 1.</em> #ES6 - Exercice 3: Observables</p>
+<h2 id="exercice-2"><a href="#exercice-2"><span class="header-section-number">8.1</span> Exercice</a></h2>
+<p>La collection et le modèle sont tous les 2 &quot;observables&quot;, factorisez ce comportement :</p>
+<ul>
+<li><code>public/js/skeleton/Collection.js</code></li>
+<li><code>public/js/skeleton/Model.js</code></li>
+<li><code>public/js/skeleton/Observable.js</code></li>
+</ul>
+<p><strong>Remarque</strong>: les spécifications sont décrites dans les fichiers</p>
+<pre><code>cd 03-observables
+node app.js
+http://localhost:3000</code></pre>
+<h1 id="correction-2"><a href="#correction-2"><span class="header-section-number">9</span> Correction</a></h1>
+<h2 id="observable.js"><a href="#observable.js"><span class="header-section-number">9.1</span> <code>Observable.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Observable {
+
+  <span class="fu">constructor</span> (observers=[]) {
+    <span class="kw">this</span>.<span class="fu">observers</span> = observers;
+  }
+
+  <span class="fu">addObserver</span> (observer) {
+    <span class="kw">this</span>.<span class="ot">observers</span>.<span class="fu">push</span>(observer);
+  }
+
+  <span class="fu">notifyObservers</span> (context) {
+    <span class="kw">this</span>.<span class="ot">observers</span>.<span class="fu">forEach</span>((observer) =&gt; {
+      <span class="ot">observer</span>.<span class="fu">update</span>(context)
+    })
+  }
+}
+
+<span class="kw">export</span> <span class="kw">default</span> Observable;</code></pre>
+<h2 id="model.js-1"><a href="#model.js-1"><span class="header-section-number">9.2</span> <code>Model.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">import</span> Observable from <span class="st">&#39;./Observable&#39;</span>;
+
+<span class="kw">class</span> Model <span class="kw">extends</span> Observable {
+
+  <span class="fu">constructor</span> (fields={}, observers=[]) {
+    <span class="kw">this</span>.<span class="fu">fields</span> = fields;
+    <span class="kw">super</span>(observers);
+  }
+
+  <span class="fu">get</span> (fieldName) {
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">fields</span>[fieldName];
+  }
+
+  <span class="fu">set</span> (fieldName, value) {
+    <span class="kw">this</span>.<span class="fu">fields</span>[fieldName] = value;
+    <span class="kw">return</span> <span class="kw">this</span>;
+  }
+
+  <span class="fu">toString</span> () {
+    <span class="kw">return</span> <span class="ot">JSON</span>.<span class="fu">stringify</span>(<span class="kw">this</span>.<span class="fu">fields</span>)
+  }
+
+}
+
+<span class="kw">export</span> <span class="kw">default</span> Model;</code></pre>
+<h2 id="collection.js-1"><a href="#collection.js-1"><span class="header-section-number">9.3</span> <code>Collection.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">import</span> Observable from <span class="st">&#39;./Observable&#39;</span>;
+
+<span class="kw">class</span> Collection <span class="kw">extends</span> Observable {
+  <span class="fu">constructor</span> (model, models = [], observers = []) {
+    <span class="kw">this</span>.<span class="fu">model</span> = model;
+    <span class="kw">this</span>.<span class="fu">models</span> = models;
+    <span class="kw">super</span>(observers);
+  }
+
+  <span class="fu">toString</span> () {
+    <span class="kw">return</span> <span class="ot">JSON</span>.<span class="fu">stringify</span>(<span class="kw">this</span>.<span class="fu">models</span>);
+  }
+
+
+  <span class="fu">add</span> (model) {
+    <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">push</span>(model);
+    <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;add&quot;</span>, <span class="dt">model</span>: model});
+    <span class="kw">return</span> <span class="kw">this</span>;
+  }
+
+  <span class="fu">each</span> (callbck) {
+    <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">forEach</span>(callbck)
+  }
+
+  <span class="fu">filter</span> (callbck) {
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">filter</span>(callbck)
+  }
+
+  <span class="fu">size</span> () { <span class="kw">return</span> <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">length</span>; }
+
+}
+
+<span class="kw">export</span> <span class="kw">default</span> Collection;</code></pre>
+<h1 id="es6---partie-4"><a href="#es6---partie-4"><span class="header-section-number">10</span> ES6 - Partie 4</a></h1>
+<h2 id="interpolations-de-chaînes"><a href="#interpolations-de-chaînes"><span class="header-section-number">10.1</span> Interpolations de chaînes</a></h2>
+<h3 id="template-strings"><a href="#template-strings"><span class="header-section-number">10.1.1</span> Template strings</a></h3>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> firstName = <span class="st">&quot;Bob&quot;</span>, lastName = <span class="st">&quot;Morane&quot;</span>;
+<span class="ot">console</span>.<span class="fu">log</span>(`Hello I<span class="st">&#39;m ${firstName} ${lastName}`); // Hello I&#39;</span>m Bob Morane</code></pre>
+<h3 id="multiline-strings"><a href="#multiline-strings"><span class="header-section-number">10.1.2</span> Multiline strings</a></h3>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> firstName = <span class="st">&quot;Bob&quot;</span>, lastName = <span class="st">&quot;Morane&quot;</span>;
+<span class="ot">console</span>.<span class="fu">log</span>(`
+Hello I<span class="st">&#39;m </span>
+  ${firstName} 
+  ${lastName}
+`
+); 
+<span class="co">/*</span>
+<span class="co">Hello I&#39;m </span>
+<span class="co">  Bob </span>
+<span class="co">  Morane</span>
+<span class="co">*/</span></code></pre>
+<h3 id="tagged-template-strings"><a href="#tagged-template-strings"><span class="header-section-number">10.1.3</span> Tagged template strings</a></h3>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> upper = (strings, ...<span class="fu">values</span>) =&gt; {
+  <span class="ot">console</span>.<span class="fu">log</span>(strings); <span class="co">// [&quot;Hello I&#39;m &quot;, &quot; &quot;, &quot;&quot;, raw: Array[3]]</span>
+  <span class="ot">console</span>.<span class="fu">log</span>(values);  <span class="co">// [&quot;Bob&quot;, &quot;Morane&quot;] </span>
+  <span class="kw">let</span> result = <span class="st">&quot;&quot;</span>;
+  <span class="kw">for</span>(<span class="kw">var</span> i = <span class="dv">0</span>; i &lt; <span class="ot">strings</span>.<span class="fu">length</span>; i++) {
+      result = result + strings[i];
+      <span class="kw">if</span> (i &lt; <span class="ot">values</span>.<span class="fu">length</span>) {
+          result = result + values[i];
+      }
+  }
+  <span class="kw">return</span> <span class="ot">result</span>.<span class="fu">toUpperCase</span>();
+}
+<span class="kw">let</span> firstName = <span class="st">&quot;Bob&quot;</span>, lastName = <span class="st">&quot;Morane&quot;</span>;
+<span class="ot">console</span>.<span class="fu">log</span>(upper `Hello I<span class="st">&#39;m ${firstName} ${lastName}`)</span>
+<span class="co">/*</span>
+<span class="co">HELLO I&#39;M BOB MORANE</span>
+<span class="co">*/</span></code></pre>
+<h2 id="mixin-dobjets"><a href="#mixin-dobjets"><span class="header-section-number">10.2</span> Mixin d'objets</a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> tonyStark = {
+  <span class="dt">firstName</span>:<span class="st">&quot;Tony&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Stark&quot;</span>
+};
+<span class="kw">let</span> armorAbilities = {
+  <span class="dt">fly</span>:() =&gt; <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;I&#39;m flying&quot;</span>)
+};
+<span class="ot">Object</span>.<span class="fu">assign</span>(tonyStark, armorAbilities);
+
+<span class="ot">tonyStark</span>.<span class="fu">fly</span>(); <span class="co">// I&#39;m flying</span></code></pre>
+<h2 id="array.from"><a href="#array.from"><span class="header-section-number">10.3</span> Array.from</a></h2>
+<p>Exemple:</p>
+<p>Avant pour parcourir comme un tableau le résultat d'un <code>document.querySelectorAll</code>, il fallait d'abord transformer ce résultat en tableau :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> items = [].<span class="ot">slice</span>.<span class="fu">apply</span>(<span class="ot">document</span>.<span class="fu">querySelectorAll</span>(<span class="st">&quot;li&quot;</span>));
+<span class="co">// ou var items = Array.prototype.slice.apply(document.querySelectorAll(&quot;li&quot;));</span>
+<span class="ot">items</span>.<span class="fu">forEach</span>(<span class="kw">function</span>(item) { ... });</code></pre>
+<p>Maintenant :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="ot">Array</span>.<span class="fu">from</span>(<span class="ot">document</span>.<span class="fu">querySelectorAll</span>(<span class="st">&quot;li&quot;</span>)).<span class="fu">forEach</span>((item) =&gt; {})</code></pre>
+<h1 id="es6---exercice-4-views"><a href="#es6---exercice-4-views"><span class="header-section-number">11</span> ES6 - Exercice 4: Views</a></h1>
+<h2 id="remarque-selector.js"><a href="#remarque-selector.js"><span class="header-section-number">11.1</span> Remarque : <code>selector.js</code></a></h2>
+<p>vous avez un mini sélecteur &quot;à la jquery&quot; ici : <code>public/js/skeleton/selector.js</code></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> q = (selector) =&gt; {
+
+  <span class="kw">var</span> nodes = <span class="ot">Array</span>.<span class="fu">from</span>(<span class="ot">document</span>.<span class="fu">querySelectorAll</span>(selector));
+
+  <span class="kw">if</span> (<span class="ot">nodes</span>.<span class="fu">length</span> == <span class="dv">1</span>) {
+    nodes = nodes[<span class="dv">0</span>];
+  } <span class="kw">else</span> {
+
+    <span class="ot">Object</span>.<span class="fu">assign</span>(nodes, {
+      <span class="fu">first</span> ()  { <span class="kw">return</span> <span class="kw">this</span>[<span class="dv">0</span>]; },
+      <span class="fu">last</span> () { <span class="kw">return</span> <span class="kw">this</span>[<span class="kw">this</span>.<span class="fu">length</span><span class="dv">-1</span>]; }
+    });
+  }
+
+  <span class="ot">nodes</span>.<span class="fu">find</span> = q;
+
+  <span class="kw">return</span> nodes;
+}
+
+<span class="kw">export</span> <span class="kw">default</span> q;</code></pre>
+<p>qui s'utilise comme ceci:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">import</span> $q from <span class="st">&#39;js/skeleton/selector&#39;</span>;
+
+<span class="fu">$q</span>(<span class="st">&quot;h1&quot;</span>);
+
+<span class="fu">$q</span>(<span class="st">&quot;form&quot;</span>).<span class="fu">find</span>(<span class="st">&quot;button&quot;</span>).<span class="fu">innerHTML</span> = <span class="st">&quot;HELLO&quot;</span>;
+
+<span class="co">/* etc. ... */</span></code></pre>
+<h2 id="exercice-3"><a href="#exercice-3"><span class="header-section-number">11.2</span> Exercice</a></h2>
+<ul>
+<li>complétez <code>public/js/skeleton/View.js</code> pour que <code>public/js/app/views/Title.js</code> s'affiche</li>
+<li>complétez <code>public/js/skeleton/View.js</code> pour que <code>public/js/app/views/HumanForm.js</code> s'affiche</li>
+<li>complétez <code>public/js/app/views/HumansList.js</code> pour afficher la liste des humains</li>
+<li>testez <code>public/js/app/views/HumanForm.js</code> pour vérifier que la liste des humains se met à jour</li>
+</ul>
+<p><strong>Remarque</strong>: les spécifications sont décrites dans les fichiers</p>
+<pre><code>cd 04-views
+node app.js
+http://localhost:3000</code></pre>
+<h1 id="correction-3"><a href="#correction-3"><span class="header-section-number">12</span> Correction</a></h1>
+<h2 id="view.js"><a href="#view.js"><span class="header-section-number">12.1</span> <code>View.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> View {
+
+  <span class="fu">constructor</span> (options={}) {
+    <span class="co">/*</span>
+<span class="co">     exemple:</span>
+<span class="co">     options: {model,collection,element}</span>
+<span class="co">     */</span>
+    <span class="ot">Object</span>.<span class="fu">assign</span>(<span class="kw">this</span>, options);
+  }
+
+  <span class="fu">html</span> (code) {
+    <span class="kw">this</span>.<span class="ot">element</span>.<span class="fu">innerHTML</span> = code;
+  }
+
+  <span class="co">// transformer la vue en observer</span>
+  <span class="fu">listen</span> (observable, callback) {
+    <span class="ot">observable</span>.<span class="fu">addObserver</span>(<span class="kw">this</span>);
+    <span class="co">// la vue devient un observer</span>
+    <span class="kw">this</span>.<span class="fu">update</span> = callback;
+  }
+
+}
+
+<span class="kw">export</span> <span class="kw">default</span> View;</code></pre>
+<h2 id="title.js"><a href="#title.js"><span class="header-section-number">12.2</span> <code>Title.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">import</span> View from <span class="st">&#39;../../skeleton/View&#39;</span>;
+<span class="kw">import</span> $q from <span class="st">&#39;../../skeleton/selector&#39;</span>;
+
+<span class="kw">class</span> Title <span class="kw">extends</span> View {
+
+  <span class="fu">constructor</span> (title) {
+
+    <span class="kw">super</span>({
+      <span class="dt">element</span>: <span class="fu">$q</span>(<span class="st">&quot;#my-title&quot;</span>)
+    });
+
+    <span class="kw">this</span>.<span class="fu">title</span> = title;
+
+    <span class="co">// afficher le titre</span>
+    <span class="kw">this</span>.<span class="fu">render</span>();
+  }
+
+  <span class="fu">template</span> (title) {
+    <span class="kw">return</span> `&lt;h1 style=<span class="st">&quot;color:green;&quot;</span>&gt;${title}&lt;<span class="ot">/h1&gt;`;</span>
+<span class="ot">  }</span>
+
+<span class="ot">  render </span><span class="fl">()</span><span class="ot"> {</span>
+<span class="ot">    this.html</span><span class="fl">(</span><span class="ot">this.template</span><span class="fl">(</span><span class="ot">this.title</span><span class="fl">))</span><span class="ot">;</span>
+<span class="ot">  }</span>
+
+<span class="ot">}</span>
+
+<span class="ot">export default Title;</span></code></pre>
+<h2 id="humanslist.js"><a href="#humanslist.js"><span class="header-section-number">12.3</span> <code>HumansList.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">
+<span class="kw">import</span> View from <span class="st">&#39;../../skeleton/View&#39;</span>;
+<span class="kw">import</span> $q from <span class="st">&#39;../../skeleton/selector&#39;</span>;
+
+<span class="kw">class</span> HumansList <span class="kw">extends</span> View {
+
+  <span class="fu">constructor</span> (humansCollection) {
+
+    <span class="kw">super</span>({
+      <span class="dt">collection</span>: humansCollection,
+      <span class="dt">element</span>: <span class="fu">$q</span>(<span class="st">&quot;#humans-list&quot;</span>)
+    });
+
+    <span class="co">// afficher la liste lorsque la collection est &quot;chargée&quot;</span>
+    <span class="co">// ou lorsque l&#39;on ajoute un modèle</span>
+    <span class="kw">this</span>.<span class="fu">listen</span>(humansCollection, (context) =&gt; {
+      <span class="kw">if</span> (<span class="ot">context</span>.<span class="fu">event</span> == <span class="st">&quot;loaded&quot;</span> || <span class="ot">context</span>.<span class="fu">event</span> == <span class="st">&quot;add&quot;</span>) {
+        <span class="kw">this</span>.<span class="fu">render</span>();
+      }
+    })
+
+  }
+
+  <span class="fu">template</span> (humans) {
+    <span class="kw">return</span> `
+      &lt;ul&gt;${
+      <span class="ot">humans</span>.<span class="ot">models</span>.<span class="fu">map</span>(
+        (human) =&gt; `&lt;li&gt;${<span class="ot">human</span>.<span class="fu">get</span>(<span class="st">&quot;firstName&quot;</span>)}, ${<span class="ot">human</span>.<span class="fu">get</span>(<span class="st">&quot;lastName&quot;</span>)}&lt;<span class="ot">/li&gt;`</span>
+<span class="ot">      </span><span class="fl">)</span><span class="ot">.join</span><span class="fl">(</span><span class="ot">&quot;&quot;</span><span class="fl">)</span>
+<span class="ot">      }&lt;/ul</span>&gt;
+    `;
+  }
+
+  <span class="fu">render</span> () {
+    <span class="kw">this</span>.<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>(<span class="kw">this</span>.<span class="fu">collection</span>));
+  }
+
+}
+
+<span class="kw">export</span> <span class="kw">default</span> HumansList;</code></pre>
+<h1 id="es6---partie-5"><a href="#es6---partie-5"><span class="header-section-number">13</span> ES6 - Partie 5</a></h1>
+<h2 id="les-promises"><a href="#les-promises"><span class="header-section-number">13.1</span> Les Promises!</a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> doSomeThing = <span class="kw">new</span> <span class="fu">Promise</span>((resolve, reject) =&gt; {
+
+  <span class="co">// faites quelque chose (asynchrone)</span>
+
+  <span class="kw">let</span> allisfine = <span class="kw">true</span>; <span class="co">// essayez avec false</span>
+  
+  <span class="kw">if</span> (allisfine) {
+    <span class="fu">resolve</span>(<span class="st">&quot;Hello World!&quot;</span>);
+  }
+  <span class="kw">else</span> {
+    <span class="fu">reject</span>(<span class="fu">Error</span>(<span class="st">&quot;Ouch&quot;</span>));
+  }
+});
+
+doSomeThing
+  .<span class="fu">then</span>((data) =&gt; { <span class="ot">console</span>.<span class="fu">log</span>(data); })
+  .<span class="fu">catch</span>((err) =&gt; { <span class="ot">console</span>.<span class="fu">log</span>(err); });</code></pre>
+<p><strong>Voir cet article</strong>: <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">http://www.html5rocks.com/en/tutorials/es6/promises/</a></p>
+<h1 id="es6---exercice-5-request"><a href="#es6---exercice-5-request"><span class="header-section-number">14</span> ES6 - Exercice 5: Request</a></h1>
+<h2 id="remarque-request.js"><a href="#remarque-request.js"><span class="header-section-number">14.1</span> Remarque : <code>Request.js</code></a></h2>
+<p>vous avez une classe pour faire des requêtes ajax : <code>public/js/skeleton/Request.js</code></p>
+<p>qui s'utilise comme ceci:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">
+<span class="kw">let</span> request = <span class="kw">new</span> <span class="fu">Request</span>(<span class="st">&quot;/about&quot;</span>).<span class="fu">get</span>()
+  .<span class="fu">then</span>((data) =&gt; {
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;data&quot;</span>, data)
+  })
+  .<span class="fu">catch</span>((error) =&gt; {
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;error&quot;</span>, error)
+  })
+    
+<span class="kw">new</span> <span class="fu">Request</span>(<span class="st">&quot;/humans&quot;</span>).<span class="fu">post</span>({<span class="dt">firstName</span>:<span class="st">&quot;JOHN&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;DOE&quot;</span>})
+  .<span class="fu">then</span>((data) =&gt; {
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;data&quot;</span>, data)
+  })
+  .<span class="fu">catch</span>((error) =&gt; {
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;error&quot;</span>, error)
+  })    
+    </code></pre>
+<h2 id="exercice-4"><a href="#exercice-4"><span class="header-section-number">14.2</span> Exercice</a></h2>
+<ul>
+<li>complétez <code>public/js/skeleton/Model.js</code> en complétant la méthode <code>save()</code></li>
+<li>complétez <code>public/js/app/views/HumansList.js</code> pour afficher la liste des humains quand la collection est modifiée</li>
+<li>testez <code>public/js/app/views/HumanForm.js</code> pour vérifier que la liste des humains se met à jour</li>
+</ul>
+<p><strong>Remarque</strong>: les spécifications sont décrites dans les fichiers</p>
+<pre><code>cd 05-sync
+node app.js
+http://localhost:3000</code></pre>
+<h1 id="correction-4"><a href="#correction-4"><span class="header-section-number">15</span> Correction</a></h1>
+<h2 id="model.js-2"><a href="#model.js-2"><span class="header-section-number">15.1</span> <code>Model.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">import</span> Observable from <span class="st">&#39;./Observable&#39;</span>;
+<span class="kw">import</span> Request from <span class="st">&#39;./Request&#39;</span>;
+
+<span class="kw">class</span> Model <span class="kw">extends</span> Observable {
+
+  <span class="co">// ajout de l&#39;url</span>
+  <span class="fu">constructor</span> (fields={}, url=<span class="st">&quot;/&quot;</span>, observers=[]) {
+
+    <span class="kw">this</span>.<span class="fu">fields</span> = fields;
+    <span class="kw">this</span>.<span class="fu">url</span> = url;
+
+    <span class="kw">super</span>(observers);
+  }
+
+  <span class="fu">get</span> (fieldName) {
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">fields</span>[fieldName];
+  }
+
+  <span class="fu">set</span> (fieldName, value) {
+    <span class="kw">this</span>.<span class="fu">fields</span>[fieldName] = value;
+    <span class="kw">return</span> <span class="kw">this</span>;
+  }
+
+  <span class="fu">toString</span> () {
+    <span class="kw">return</span> <span class="ot">JSON</span>.<span class="fu">stringify</span>(<span class="kw">this</span>.<span class="fu">fields</span>)
+  }
+
+  <span class="co">/*--- sync ---*/</span>
+
+  <span class="fu">id</span>() { <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">get</span>(<span class="st">&quot;_id&quot;</span>);}
+
+  <span class="fu">save</span> () {
+    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Promise</span>((resolve, reject) =&gt; {
+
+      <span class="kw">if</span> (<span class="kw">this</span>.<span class="fu">id</span>() == <span class="kw">undefined</span>) {
+        <span class="co">// create (insert)</span>
+        <span class="kw">new</span> <span class="fu">Request</span>(<span class="kw">this</span>.<span class="fu">url</span>).<span class="fu">post</span>(<span class="kw">this</span>.<span class="fu">fields</span>)
+          .<span class="fu">then</span>((data) =&gt; {
+            <span class="kw">this</span>.<span class="fu">fields</span> = data;
+            <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;create&quot;</span>, <span class="dt">model</span>: <span class="kw">this</span>});
+            <span class="fu">resolve</span>(data);
+          })
+          .<span class="fu">catch</span>((error) =&gt; <span class="fu">reject</span>(error))
+      } <span class="kw">else</span> {
+        <span class="co">// update</span>
+        <span class="kw">new</span> <span class="fu">Request</span>(`${<span class="kw">this</span>.<span class="fu">url</span>}<span class="ot">/${this.id</span><span class="fl">()</span><span class="ot">}`</span><span class="fl">)</span><span class="ot">.put</span><span class="fl">(</span><span class="ot">this.fields</span><span class="fl">)</span>
+<span class="ot">          .then</span><span class="fl">((</span><span class="ot">data</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
+<span class="ot">            this.fields = data;</span>
+<span class="ot">            this.notifyObservers</span><span class="fl">(</span><span class="ot">{event: &quot;update&quot;, model: this}</span><span class="fl">)</span><span class="ot">;</span>
+<span class="ot">            resolve</span><span class="fl">(</span><span class="ot">data</span><span class="fl">)</span><span class="ot">;</span>
+<span class="ot">          }</span><span class="fl">)</span>
+<span class="ot">          .catch</span><span class="fl">((</span><span class="ot">error</span><span class="fl">)</span><span class="ot"> =&gt; reject</span><span class="fl">(</span><span class="ot">error</span><span class="fl">))</span>
+<span class="ot">      }</span>
+<span class="ot">    }</span><span class="fl">)</span><span class="ot">;</span>
+
+<span class="ot">  }</span>
+
+<span class="ot">  fetch </span><span class="fl">(</span><span class="ot">id</span><span class="fl">)</span><span class="ot"> {</span>
+
+<span class="ot">    return new Promise</span><span class="fl">((</span><span class="ot">resolve, reject</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
+<span class="ot">      if </span><span class="fl">(</span><span class="ot">id == undefined</span><span class="fl">)</span><span class="ot"> {</span>
+<span class="ot">        new Request</span><span class="fl">(</span><span class="ot">`${this.url}/</span>${<span class="kw">this</span>.<span class="fu">id</span>()}`).<span class="fu">get</span>()
+          .<span class="fu">then</span>((data) =&gt; {
+            <span class="kw">this</span>.<span class="fu">fields</span> = data;
+            <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;fetch&quot;</span>, <span class="dt">model</span>: <span class="kw">this</span>});
+            <span class="fu">resolve</span>(data)
+          })
+          .<span class="fu">catch</span>((error) =&gt; <span class="fu">reject</span>(error))
+      } <span class="kw">else</span> {
+        <span class="kw">new</span> <span class="fu">Request</span>(`${<span class="kw">this</span>.<span class="fu">url</span>}<span class="ot">/${id}`</span><span class="fl">)</span><span class="ot">.get</span><span class="fl">()</span>
+<span class="ot">          .then</span><span class="fl">((</span><span class="ot">data</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
+<span class="ot">            this.fields = data;</span>
+<span class="ot">            this.notifyObservers</span><span class="fl">(</span><span class="ot">{event: &quot;fetch&quot;, model: this}</span><span class="fl">)</span><span class="ot">;</span>
+<span class="ot">            resolve</span><span class="fl">(</span><span class="ot">data</span><span class="fl">)</span>
+<span class="ot">          }</span><span class="fl">)</span>
+<span class="ot">          .catch</span><span class="fl">((</span><span class="ot">error</span><span class="fl">)</span><span class="ot"> =&gt; reject</span><span class="fl">(</span><span class="ot">error</span><span class="fl">))</span>
+<span class="ot">      }</span>
+<span class="ot">    }</span><span class="fl">)</span><span class="ot">;</span>
+
+<span class="ot">  }</span>
+
+<span class="ot">  delete </span><span class="fl">(</span><span class="ot">id</span><span class="fl">)</span><span class="ot"> {</span>
+<span class="ot">    return new Promise</span><span class="fl">((</span><span class="ot">resolve, reject</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
+<span class="ot">      if </span><span class="fl">(</span><span class="ot">id == undefined</span><span class="fl">)</span><span class="ot"> {</span>
+<span class="ot">        new Request</span><span class="fl">(</span><span class="ot">`${this.url}/</span>${<span class="kw">this</span>.<span class="fu">id</span>()}`).<span class="fu">delete</span>()
+          .<span class="fu">then</span>((data) =&gt; {
+            <span class="kw">this</span>.<span class="fu">fields</span> = data;
+            <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;delete&quot;</span>, <span class="dt">model</span>: <span class="kw">this</span>});
+            <span class="fu">resolve</span>(data)
+          })
+          .<span class="fu">catch</span>((error)=&gt;<span class="fu">reject</span>(error))
+      } <span class="kw">else</span> {
+        <span class="kw">new</span> <span class="fu">Request</span>(`${<span class="kw">this</span>.<span class="fu">url</span>}<span class="ot">/${id}`</span><span class="fl">)</span><span class="ot">.delete</span><span class="fl">()</span>
+<span class="ot">          .then</span><span class="fl">((</span><span class="ot">data</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
+<span class="ot">            this.fields = data;</span>
+<span class="ot">            this.notifyObservers</span><span class="fl">(</span><span class="ot">{event: &quot;delete&quot;, model: this}</span><span class="fl">)</span><span class="ot">;</span>
+<span class="ot">            resolve</span><span class="fl">(</span><span class="ot">data</span><span class="fl">)</span>
+<span class="ot">          }</span><span class="fl">)</span>
+<span class="ot">          .catch</span><span class="fl">((</span><span class="ot">error</span><span class="fl">)</span><span class="ot">=&gt;reject</span><span class="fl">(</span><span class="ot">error</span><span class="fl">))</span>
+<span class="ot">      }</span>
+<span class="ot">    }</span><span class="fl">)</span><span class="ot">;</span>
+<span class="ot">  }</span>
+
+
+<span class="ot">}</span>
+
+<span class="ot">export default Model;</span></code></pre>
+<h2 id="collection.js-2"><a href="#collection.js-2"><span class="header-section-number">15.2</span> <code>Collection.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">import</span> Observable from <span class="st">&#39;./Observable&#39;</span>;
+<span class="kw">import</span> Request from <span class="st">&#39;./Request&#39;</span>;
+
+<span class="kw">class</span> Collection <span class="kw">extends</span> Observable {
+  <span class="co">// ajout de l&#39;url</span>
+  <span class="fu">constructor</span> (model, url=<span class="st">&quot;/&quot;</span>, models = [], observers = []) {
+    <span class="kw">this</span>.<span class="fu">model</span> = model;
+    <span class="kw">this</span>.<span class="fu">models</span> = models;
+    <span class="kw">this</span>.<span class="fu">url</span> = url;
+    <span class="kw">super</span>(observers);
+  }
+
+  <span class="fu">toString</span> () {
+    <span class="kw">return</span> <span class="ot">JSON</span>.<span class="fu">stringify</span>(<span class="kw">this</span>.<span class="fu">models</span>);
+  }
+
+
+  <span class="fu">add</span> (model) {
+    <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">push</span>(model);
+    <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;add&quot;</span>, <span class="dt">model</span>: model});
+    <span class="kw">return</span> <span class="kw">this</span>;
+  }
+
+  <span class="fu">each</span> (callbck) {
+    <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">forEach</span>(callbck)
+  }
+
+  <span class="fu">filter</span> (callbck) {
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">filter</span>(callbck)
+  }
+
+  <span class="fu">size</span> () { <span class="kw">return</span> <span class="kw">this</span>.<span class="ot">models</span>.<span class="fu">length</span>; }
+
+
+  <span class="co">/*--- sync ---*/</span>
+
+  <span class="fu">fetch</span> () {
+    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Promise</span>((resolve, reject) =&gt; {
+      <span class="kw">new</span> <span class="fu">Request</span>(<span class="kw">this</span>.<span class="fu">url</span>).<span class="fu">get</span>().<span class="fu">then</span>((models) =&gt; {
+        <span class="kw">this</span>.<span class="fu">models</span> = []; <span class="co">/* empty list */</span>
+
+        <span class="ot">models</span>.<span class="fu">forEach</span>((fields) =&gt; {
+          <span class="kw">this</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">this</span>.<span class="fu">model</span>(fields));
+        });
+
+        <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;fetch&quot;</span>, <span class="dt">models</span>:models});
+        <span class="fu">resolve</span>(models);
+      })
+        .<span class="fu">catch</span>((error) =&gt; <span class="fu">reject</span>(error))
+    });
+
+  }
+
+
+}
+
+<span class="kw">export</span> <span class="kw">default</span> Collection;</code></pre>
+<h1 id="es6---partie-6"><a href="#es6---partie-6"><span class="header-section-number">16</span> ES6 - Partie 6</a></h1>
+<h2 id="map"><a href="#map"><span class="header-section-number">16.1</span> Map</a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> map = <span class="kw">new</span> <span class="fu">Map</span>();
+<span class="ot">map</span>.<span class="fu">set</span>(<span class="st">&quot;one&quot;</span>,{<span class="dt">firstName</span>:<span class="st">&quot;John&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Doe&quot;</span>});
+<span class="ot">map</span>.<span class="fu">set</span>(<span class="st">&quot;two&quot;</span>,{<span class="dt">firstName</span>:<span class="st">&quot;Jane&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Doe&quot;</span>});
+
+<span class="ot">console</span>.<span class="fu">log</span>(<span class="ot">map</span>.<span class="fu">has</span>(<span class="st">&quot;one&quot;</span>));  <span class="co">// true</span>
+<span class="ot">console</span>.<span class="fu">log</span>(<span class="ot">map</span>.<span class="fu">get</span>(<span class="st">&quot;one&quot;</span>));  <span class="co">// Object {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;}</span>
+<span class="ot">console</span>.<span class="fu">log</span>(<span class="ot">map</span>.<span class="fu">size</span>);        <span class="co">// 2</span>
+
+<span class="kw">for</span> (<span class="kw">let</span> key of <span class="ot">map</span>.<span class="fu">keys</span>()) {
+  <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;Key: %s&quot;</span>, key);
+}
+<span class="co">/*</span>
+<span class="co"> Key: one</span>
+<span class="co"> Key: two</span>
+<span class="co">*/</span>
+
+<span class="kw">for</span> (<span class="kw">let</span> value of <span class="ot">map</span>.<span class="fu">values</span>()) {
+  <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;Value: %s %s&quot;</span>, <span class="ot">value</span>.<span class="fu">firstName</span>, <span class="ot">value</span>.<span class="fu">lastName</span>);
+}
+<span class="co">/*</span>
+<span class="co"> Value: John Doe</span>
+<span class="co"> Value: Jane Doe</span>
+<span class="co">*/</span>
+
+<span class="kw">for</span> (<span class="kw">let</span> item of map) {
+  <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;Key: %s, Value: %s&quot;</span>, item[<span class="dv">0</span>], item[<span class="dv">1</span>].<span class="fu">firstName</span>, item[<span class="dv">1</span>].<span class="fu">lastName</span>);
+}
+<span class="co">/*</span>
+<span class="co"> Key: one, Value: John Doe</span>
+<span class="co"> Key: two, Value: Jane Doe</span>
+<span class="co">*/</span>
+
+<span class="co">/* Et aussi : */</span>
+
+<span class="kw">let</span> myOtherMap = <span class="kw">new</span> <span class="fu">Map</span>([
+  [<span class="st">&quot;one&quot;</span>,{<span class="dt">firstName</span>:<span class="st">&quot;John&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Doe&quot;</span>}],
+  [<span class="st">&quot;two&quot;</span>,{<span class="dt">firstName</span>:<span class="st">&quot;Jane&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Doe&quot;</span>}],
+  [<span class="st">&quot;three&quot;</span>,{<span class="dt">firstName</span>:<span class="st">&quot;Bob&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Morane&quot;</span>}]
+]);
+
+<span class="ot">myOtherMap</span>.<span class="fu">delete</span>(<span class="st">&quot;three&quot;</span>)
+
+<span class="ot">myOtherMap</span>.<span class="fu">forEach</span>((item)=&gt;{
+  <span class="ot">console</span>.<span class="fu">log</span>(item)
+})
+<span class="co">/*</span>
+<span class="co"> Object {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;}</span>
+<span class="co"> Object {firstName: &quot;Jane&quot;, lastName: &quot;Doe&quot;}</span>
+<span class="co">*/</span></code></pre>
+<h2 id="remarque"><a href="#remarque"><span class="header-section-number">16.2</span> Remarque</a></h2>
+<p>Vos classes peuvent hériter des types javascript (mais pas tout le temps :( )</p>
+<h1 id="es6---exercice-6-router"><a href="#es6---exercice-6-router"><span class="header-section-number">17</span> ES6 - Exercice 6: Router</a></h1>
+<p>Le routeur a plusieurs routes</p>
+<p>Routes : une url danssle navigateur que l'on associe à un traitement (ex afficher une vue) Du coup les fonctionnalités de ma webapp sont bookmarkables</p>
+<p>Ma classe Router a une propriété <code>routes</code> qui est une <code>Map</code></p>
+<p>Donc si je veux créer un routeur et rajouter des routes :</p>
+<pre><code> let router = new Router();
+
+ router.routes.set(&quot;humans&quot;, (args) =&gt; {
+  // faire quelque chose
+ });
+
+ router.routes.set(&quot;animals&quot;, (args) =&gt; {
+  // faire quelque chose
+ });
+
+ router.routes.set(&quot;/&quot;, (args) =&gt; {
+ // faire quelque chose
+ });</code></pre>
+<ul>
+<li>Ajouter une méthode <code>add(uri, action)</code> à la classe <code>Router</code></li>
+<li>Ajouter une méthode <code>match(uri)</code> qui servira à vérifier les urls saisies dans le navigateur ou les liens cliqués et déclencher les méthodes associées</li>
+</ul>
+<p>uri peut prendre différents types de valeurs :</p>
+<ul>
+<li><code>#/humans</code></li>
+<li><code>#/humans/1234</code></li>
+<li>etc...</li>
+</ul>
+<p>Donc <code>match(uri)</code> va &quot;retraiter&quot; <code>uri</code> : enlever le <code>#/</code> et:</p>
+<ul>
+<li><code>#/humans</code> devient humans</li>
+<li><code>#/humans/1234</code> devient humans/1234</li>
+</ul>
+<p>Ensuite</p>
+<ul>
+<li>&quot;spliter&quot; <code>uri</code> : on sépare tous les éléments entre les <code>&quot;/&quot;</code></li>
+<li><p>on obtient un tableau que l'on filtre pour ne garder que les éléments dont la taille &gt; 0</p></li>
+<li><strong>le 1er élément du tableau</strong> devient <strong>la clé</strong> à rechercher dans la map</li>
+<li><p>les éléments restants représentent <strong>les paramètres</strong> que l'on passera à la méthode correspondant à la clé</p></li>
+</ul>
+<p>Par exemple si je saisis <code>#/humans/bob/morane</code>, cela deviendra :</p>
+<pre><code>[&quot;humans&quot;, &quot;bob&quot;, &quot;morane&quot;]</code></pre>
+<p><em>et j'irais chercher dans mon instance de Router la clé <code>&quot;humans&quot;</code> qui va me retourner une méthode à laquelle je passerais (si elle existe) les paramètres <code>[&quot;bob&quot;, &quot;morane&quot;]</code> (donc sous forme d'un tableau) et je l'exécuterais</em></p>
+<p><em>(allez voir <code>main.js</code> pour les exemples)</em></p>
+<p><strong>J'ai ajouté une méthode <code>listen()</code></strong></p>
+<p>Elle va une 1ère fois au lancement vérifier l'url pour déterminer s'il y a un traitement à lancer, la méthode <code>match</code> du routeur sera appelé avec <code>window.location.hash</code> en paramètre.</p>
+<p><code>window.location.hash</code> : retourne la partie de l'url qui correspond à &quot;anchor&quot; : <code>http://localhost:3000/#/humans</code> donnera <code>#/humans</code></p>
+<p>Cette 1ère vérification est utile si on a bookmarké une fonctionnalité de l'application</p>
+<p>Ensuite on va s'abonner à l'évènement <code>onpopstate</code> (déclenché lorsque l'utilisateur &quot;navigue&quot;, ultilise le bouton back, etc...)</p>
+<p>et à chaque fois que l'évènement <code>onpopstate</code> sera déclenché, la méthode <code>match</code> du routeur sera appelé avec <code>window.location.hash</code> en paramètre.</p>
+<h2 id="exercice-5"><a href="#exercice-5"><span class="header-section-number">17.1</span> Exercice</a></h2>
+<ul>
+<li>complétez <code>public/js/skeleton/Router.js</code> en complétant les méthodeq <code>add()</code> et <code>match()</code></li>
+</ul>
+<p><strong>Remarque</strong>: les spécifications sont décrites dans les fichiers</p>
+<pre><code>cd 06-router
+node app.js
+http://localhost:3000</code></pre>
+<h1 id="correction-5"><a href="#correction-5"><span class="header-section-number">18</span> Correction</a></h1>
+<h2 id="router.js"><a href="#router.js"><span class="header-section-number">18.1</span> <code>Router.js</code></a></h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Router {
+
+  <span class="fu">constructor</span> () {
+    <span class="kw">this</span>.<span class="fu">routes</span> = <span class="kw">new</span> <span class="fu">Map</span>();
+  }
+
+  <span class="fu">add</span> (uri, action) {
+    <span class="kw">this</span>.<span class="ot">routes</span>.<span class="fu">set</span>(uri, action);
+    <span class="kw">return</span> <span class="kw">this</span>;
+  }
+
+  <span class="fu">match</span> (uri) {
+
+    <span class="co">// on retraite l&#39;uri: enlever les #/</span>
+    uri = <span class="ot">uri</span>.<span class="fu">replace</span>(<span class="st">&quot;#\/&quot;</span>,<span class="st">&quot;&quot;</span>);
+
+    <span class="co">// splitter uri avec &quot;/&quot; et ne garder que les éléments non vides</span>
+    <span class="kw">let</span> uriParts = <span class="ot">uri</span>.<span class="fu">split</span>(<span class="st">&quot;/&quot;</span>).<span class="fu">filter</span>((part)=&gt;<span class="ot">part</span>.<span class="fu">length</span>&gt;<span class="dv">0</span>);
+
+    <span class="co">// clé à chercher</span>
+    <span class="kw">let</span> route = uriParts[<span class="dv">0</span>];
+    <span class="co">// paramètres à passer à la méthode</span>
+    <span class="kw">let</span> params = <span class="ot">uriParts</span>.<span class="fu">slice</span>(<span class="dv">1</span>);
+
+    <span class="co">// récupérer la méthode</span>
+    <span class="kw">let</span> method = <span class="kw">this</span>.<span class="ot">routes</span>.<span class="fu">get</span>(route);
+
+    <span class="co">// exécuter la méthode</span>
+    <span class="kw">if</span> (method) {
+      <span class="fu">method</span>(params)
+    } <span class="kw">else</span> {
+      <span class="kw">this</span>.<span class="ot">routes</span>.<span class="fu">get</span>(<span class="st">&quot;/&quot;</span>)(params)
+    }
+  }
+
+  <span class="fu">listen</span> () {
+    <span class="co">// une fois le routeur en mode écoute</span>
+    <span class="co">// lui faire vérifier une 1ère fois l&#39;url pour déterminer quoi faire</span>
+    <span class="kw">this</span>.<span class="fu">match</span>(<span class="ot">window</span>.<span class="ot">location</span>.<span class="fu">hash</span>);
+
+    <span class="co">/* s&#39;abonner à onpopstate */</span>
+    <span class="ot">window</span>.<span class="fu">onpopstate</span> = (event) =&gt; {
+      <span class="kw">this</span>.<span class="fu">match</span>(<span class="ot">window</span>.<span class="ot">location</span>.<span class="fu">hash</span>);
+    };
+  }
+
+}
+
+<span class="kw">export</span> <span class="kw">default</span> Router</code></pre>
+</body>
+</html>

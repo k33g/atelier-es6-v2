@@ -1,0 +1,12 @@
+{
+  "name": "myperf",
+  "description": "myperf",
+  "version": "0.0.0",
+  "dependencies": {
+    "body-parser": "1.0.2",
+    "express": "4.1.x",
+    "nedb": "0.10.5",
+    "traceur": "0.0.66"
+
+  }
+}
