@@ -6,7 +6,8 @@ class Human  extends Model {
     //super(fields);
     super(fields, "/humans");
 
-    //Getters and Setters
+    //Getters and Setters - Old ES5 Way
+    /*
     Object.defineProperty(this, "firstName", {
       get: function (){ return this.fields["firstName"]} ,
       set: function (value) { this.fields["firstName"]=value; }
@@ -16,7 +17,15 @@ class Human  extends Model {
       get: function (){ return this.fields["lastName"]} ,
       set: function (value) { this.fields["lastName"]=value; }
     });
+    */
   }
+
+  /* new ES6 Way */
+  get firstName () { return this.get("firstName"); }
+  set firstName (value) { this.set("firstName", value); return this; }
+
+  get lastName () { return this.get("lastName"); }
+  set lastName (value) { this.set("lastName", value); return this; }
 }
 
 export default Human;
