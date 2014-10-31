@@ -33,75 +33,70 @@ class Model extends Observable {
   id() { return this.get("_id");}
 
   save () {
-    return new Promise((resolve, reject) => {
 
-      if (this.id() == undefined) {
-        // create (insert)
-        new Request(this.url).post(this.fields)
-          .then((data) => {
-            this.fields = data;
-            this.notifyObservers({event: "create", model: this});
-            resolve(data);
-          })
-          .catch((error) => reject(error))
-      } else {
-        // update
-        new Request(`${this.url}/${this.id()}`).put(this.fields)
-          .then((data) => {
-            this.fields = data;
-            this.notifyObservers({event: "update", model: this});
-            resolve(data);
-          })
-          .catch((error) => reject(error))
-      }
-    });
+    if (this.id() == undefined) {
+      // create (insert)
+      return new Request(this.url).post(this.fields)
+        .then((data) => {
+          this.fields = data;
+          this.notifyObservers({event: "create", model: this});
+          return data;
+        })
+        .catch((error) => error)
+    } else {
+      // update
+      return new Request(`${this.url}/${this.id()}`).put(this.fields)
+        .then((data) => {
+          this.fields = data;
+          this.notifyObservers({event: "update", model: this});
+          return data;
+        })
+        .catch((error) => error)
+    }
 
   }
 
   fetch (id) {
 
-    return new Promise((resolve, reject) => {
-      if (id == undefined) {
-        new Request(`${this.url}/${this.id()}`).get()
-          .then((data) => {
-            this.fields = data;
-            this.notifyObservers({event: "fetch", model: this});
-            resolve(data)
-          })
-          .catch((error) => reject(error))
-      } else {
-        new Request(`${this.url}/${id}`).get()
-          .then((data) => {
-            this.fields = data;
-            this.notifyObservers({event: "fetch", model: this});
-            resolve(data)
-          })
-          .catch((error) => reject(error))
-      }
-    });
+    if (id == undefined) {
+      return new Request(`${this.url}/${this.id()}`).get()
+        .then((data) => {
+          this.fields = data;
+          this.notifyObservers({event: "fetch", model: this});
+          return data;
+        })
+        .catch((error) => error)
+    } else {
+      return new Request(`${this.url}/${id}`).get()
+        .then((data) => {
+          this.fields = data;
+          this.notifyObservers({event: "fetch", model: this});
+          return data;
+        })
+        .catch((error) => error)
+    }
 
   }
 
   delete (id) {
-    return new Promise((resolve, reject) => {
-      if (id == undefined) {
-        new Request(`${this.url}/${this.id()}`).delete()
-          .then((data) => {
-            this.fields = data;
-            this.notifyObservers({event: "delete", model: this});
-            resolve(data)
-          })
-          .catch((error)=>reject(error))
-      } else {
-        new Request(`${this.url}/${id}`).delete()
-          .then((data) => {
-            this.fields = data;
-            this.notifyObservers({event: "delete", model: this});
-            resolve(data)
-          })
-          .catch((error)=>reject(error))
-      }
-    });
+    if (id == undefined) {
+      return new Request(`${this.url}/${this.id()}`).delete()
+        .then((data) => {
+          this.fields = data;
+          this.notifyObservers({event: "delete", model: this});
+          return data;
+        })
+        .catch((error) => error)
+    } else {
+      return new Request(`${this.url}/${id}`).delete()
+        .then((data) => {
+          this.fields = data;
+          this.notifyObservers({event: "delete", model: this});
+          return data;
+        })
+        .catch((error) => error)
+    }
+
   }
 
 

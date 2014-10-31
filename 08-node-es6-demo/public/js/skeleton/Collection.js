@@ -34,21 +34,19 @@ class Collection extends Observable {
   /*--- sync ---*/
 
   fetch () {
-    return new Promise((resolve, reject) => {
 
-      new Request(this.url).get().then((models) => {
-        this.models = []; /* empty list */
+    return new Request(this.url).get().then((models) => {
+      this.models = []; /* empty list */
 
-        models.forEach((fields) => {
-          this.add(new this.model(fields));
-        });
+      models.forEach((fields) => {
+        this.add(new this.model(fields));
+      });
 
-        this.notifyObservers({event: "fetch", models:models});
-        resolve(models);
-      })
-      .catch((error) => reject(error))
+      this.notifyObservers({event: "fetch", models:models});
+      return models;
+    })
+    .catch((error) => error)
 
-    });
 
   }
 

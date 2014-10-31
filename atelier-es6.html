@@ -895,75 +895,69 @@ http://localhost:3000</code></pre>
   <span class="fu">id</span>() { <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">get</span>(<span class="st">&quot;_id&quot;</span>);}
 
   <span class="fu">save</span> () {
-    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Promise</span>((resolve, reject) =&gt; {
 
-      <span class="kw">if</span> (<span class="kw">this</span>.<span class="fu">id</span>() == <span class="kw">undefined</span>) {
-        <span class="co">// create (insert)</span>
-        <span class="kw">new</span> <span class="fu">Request</span>(<span class="kw">this</span>.<span class="fu">url</span>).<span class="fu">post</span>(<span class="kw">this</span>.<span class="fu">fields</span>)
-          .<span class="fu">then</span>((data) =&gt; {
-            <span class="kw">this</span>.<span class="fu">fields</span> = data;
-            <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;create&quot;</span>, <span class="dt">model</span>: <span class="kw">this</span>});
-            <span class="fu">resolve</span>(data);
-          })
-          .<span class="fu">catch</span>((error) =&gt; <span class="fu">reject</span>(error))
-      } <span class="kw">else</span> {
-        <span class="co">// update</span>
-        <span class="kw">new</span> <span class="fu">Request</span>(`${<span class="kw">this</span>.<span class="fu">url</span>}<span class="ot">/${this.id</span><span class="fl">()</span><span class="ot">}`</span><span class="fl">)</span><span class="ot">.put</span><span class="fl">(</span><span class="ot">this.fields</span><span class="fl">)</span>
-<span class="ot">          .then</span><span class="fl">((</span><span class="ot">data</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
-<span class="ot">            this.fields = data;</span>
-<span class="ot">            this.notifyObservers</span><span class="fl">(</span><span class="ot">{event: &quot;update&quot;, model: this}</span><span class="fl">)</span><span class="ot">;</span>
-<span class="ot">            resolve</span><span class="fl">(</span><span class="ot">data</span><span class="fl">)</span><span class="ot">;</span>
-<span class="ot">          }</span><span class="fl">)</span>
-<span class="ot">          .catch</span><span class="fl">((</span><span class="ot">error</span><span class="fl">)</span><span class="ot"> =&gt; reject</span><span class="fl">(</span><span class="ot">error</span><span class="fl">))</span>
-<span class="ot">      }</span>
-<span class="ot">    }</span><span class="fl">)</span><span class="ot">;</span>
+    <span class="kw">if</span> (<span class="kw">this</span>.<span class="fu">id</span>() == <span class="kw">undefined</span>) {
+      <span class="co">// create (insert)</span>
+      <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Request</span>(<span class="kw">this</span>.<span class="fu">url</span>).<span class="fu">post</span>(<span class="kw">this</span>.<span class="fu">fields</span>)
+        .<span class="fu">then</span>((data) =&gt; {
+          <span class="kw">this</span>.<span class="fu">fields</span> = data;
+          <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;create&quot;</span>, <span class="dt">model</span>: <span class="kw">this</span>});
+          <span class="kw">return</span> data;
+        })
+        .<span class="fu">catch</span>((error) =&gt; error)
+    } <span class="kw">else</span> {
+      <span class="co">// update</span>
+      <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Request</span>(`${<span class="kw">this</span>.<span class="fu">url</span>}<span class="ot">/${this.id</span><span class="fl">()</span><span class="ot">}`</span><span class="fl">)</span><span class="ot">.put</span><span class="fl">(</span><span class="ot">this.fields</span><span class="fl">)</span>
+<span class="ot">        .then</span><span class="fl">((</span><span class="ot">data</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
+<span class="ot">          this.fields = data;</span>
+<span class="ot">          this.notifyObservers</span><span class="fl">(</span><span class="ot">{event: &quot;update&quot;, model: this}</span><span class="fl">)</span><span class="ot">;</span>
+<span class="ot">          return data;</span>
+<span class="ot">        }</span><span class="fl">)</span>
+<span class="ot">        .catch</span><span class="fl">((</span><span class="ot">error</span><span class="fl">)</span><span class="ot"> =&gt; error</span><span class="fl">)</span>
+<span class="ot">    }</span>
 
 <span class="ot">  }</span>
 
 <span class="ot">  fetch </span><span class="fl">(</span><span class="ot">id</span><span class="fl">)</span><span class="ot"> {</span>
 
-<span class="ot">    return new Promise</span><span class="fl">((</span><span class="ot">resolve, reject</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
-<span class="ot">      if </span><span class="fl">(</span><span class="ot">id == undefined</span><span class="fl">)</span><span class="ot"> {</span>
-<span class="ot">        new Request</span><span class="fl">(</span><span class="ot">`${this.url}/</span>${<span class="kw">this</span>.<span class="fu">id</span>()}`).<span class="fu">get</span>()
-          .<span class="fu">then</span>((data) =&gt; {
-            <span class="kw">this</span>.<span class="fu">fields</span> = data;
-            <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;fetch&quot;</span>, <span class="dt">model</span>: <span class="kw">this</span>});
-            <span class="fu">resolve</span>(data)
-          })
-          .<span class="fu">catch</span>((error) =&gt; <span class="fu">reject</span>(error))
-      } <span class="kw">else</span> {
-        <span class="kw">new</span> <span class="fu">Request</span>(`${<span class="kw">this</span>.<span class="fu">url</span>}<span class="ot">/${id}`</span><span class="fl">)</span><span class="ot">.get</span><span class="fl">()</span>
-<span class="ot">          .then</span><span class="fl">((</span><span class="ot">data</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
-<span class="ot">            this.fields = data;</span>
-<span class="ot">            this.notifyObservers</span><span class="fl">(</span><span class="ot">{event: &quot;fetch&quot;, model: this}</span><span class="fl">)</span><span class="ot">;</span>
-<span class="ot">            resolve</span><span class="fl">(</span><span class="ot">data</span><span class="fl">)</span>
-<span class="ot">          }</span><span class="fl">)</span>
-<span class="ot">          .catch</span><span class="fl">((</span><span class="ot">error</span><span class="fl">)</span><span class="ot"> =&gt; reject</span><span class="fl">(</span><span class="ot">error</span><span class="fl">))</span>
-<span class="ot">      }</span>
-<span class="ot">    }</span><span class="fl">)</span><span class="ot">;</span>
+<span class="ot">    if </span><span class="fl">(</span><span class="ot">id == undefined</span><span class="fl">)</span><span class="ot"> {</span>
+<span class="ot">      return new Request</span><span class="fl">(</span><span class="ot">`${this.url}/</span>${<span class="kw">this</span>.<span class="fu">id</span>()}`).<span class="fu">get</span>()
+        .<span class="fu">then</span>((data) =&gt; {
+          <span class="kw">this</span>.<span class="fu">fields</span> = data;
+          <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;fetch&quot;</span>, <span class="dt">model</span>: <span class="kw">this</span>});
+          <span class="kw">return</span> data;
+        })
+        .<span class="fu">catch</span>((error) =&gt; error)
+    } <span class="kw">else</span> {
+      <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Request</span>(`${<span class="kw">this</span>.<span class="fu">url</span>}<span class="ot">/${id}`</span><span class="fl">)</span><span class="ot">.get</span><span class="fl">()</span>
+<span class="ot">        .then</span><span class="fl">((</span><span class="ot">data</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
+<span class="ot">          this.fields = data;</span>
+<span class="ot">          this.notifyObservers</span><span class="fl">(</span><span class="ot">{event: &quot;fetch&quot;, model: this}</span><span class="fl">)</span><span class="ot">;</span>
+<span class="ot">          return data;</span>
+<span class="ot">        }</span><span class="fl">)</span>
+<span class="ot">        .catch</span><span class="fl">((</span><span class="ot">error</span><span class="fl">)</span><span class="ot"> =&gt; error</span><span class="fl">)</span>
+<span class="ot">    }</span>
 
 <span class="ot">  }</span>
 
 <span class="ot">  delete </span><span class="fl">(</span><span class="ot">id</span><span class="fl">)</span><span class="ot"> {</span>
-<span class="ot">    return new Promise</span><span class="fl">((</span><span class="ot">resolve, reject</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
-<span class="ot">      if </span><span class="fl">(</span><span class="ot">id == undefined</span><span class="fl">)</span><span class="ot"> {</span>
-<span class="ot">        new Request</span><span class="fl">(</span><span class="ot">`${this.url}/</span>${<span class="kw">this</span>.<span class="fu">id</span>()}`).<span class="fu">delete</span>()
-          .<span class="fu">then</span>((data) =&gt; {
-            <span class="kw">this</span>.<span class="fu">fields</span> = data;
-            <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;delete&quot;</span>, <span class="dt">model</span>: <span class="kw">this</span>});
-            <span class="fu">resolve</span>(data)
-          })
-          .<span class="fu">catch</span>((error)=&gt;<span class="fu">reject</span>(error))
-      } <span class="kw">else</span> {
-        <span class="kw">new</span> <span class="fu">Request</span>(`${<span class="kw">this</span>.<span class="fu">url</span>}<span class="ot">/${id}`</span><span class="fl">)</span><span class="ot">.delete</span><span class="fl">()</span>
-<span class="ot">          .then</span><span class="fl">((</span><span class="ot">data</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
-<span class="ot">            this.fields = data;</span>
-<span class="ot">            this.notifyObservers</span><span class="fl">(</span><span class="ot">{event: &quot;delete&quot;, model: this}</span><span class="fl">)</span><span class="ot">;</span>
-<span class="ot">            resolve</span><span class="fl">(</span><span class="ot">data</span><span class="fl">)</span>
-<span class="ot">          }</span><span class="fl">)</span>
-<span class="ot">          .catch</span><span class="fl">((</span><span class="ot">error</span><span class="fl">)</span><span class="ot">=&gt;reject</span><span class="fl">(</span><span class="ot">error</span><span class="fl">))</span>
-<span class="ot">      }</span>
-<span class="ot">    }</span><span class="fl">)</span><span class="ot">;</span>
+<span class="ot">    if </span><span class="fl">(</span><span class="ot">id == undefined</span><span class="fl">)</span><span class="ot"> {</span>
+<span class="ot">      return new Request</span><span class="fl">(</span><span class="ot">`${this.url}/</span>${<span class="kw">this</span>.<span class="fu">id</span>()}`).<span class="fu">delete</span>()
+        .<span class="fu">then</span>((data) =&gt; {
+          <span class="kw">this</span>.<span class="fu">fields</span> = data;
+          <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;delete&quot;</span>, <span class="dt">model</span>: <span class="kw">this</span>});
+          <span class="kw">return</span> data;
+        })
+        .<span class="fu">catch</span>((error) =&gt; error)
+    } <span class="kw">else</span> {
+      <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Request</span>(`${<span class="kw">this</span>.<span class="fu">url</span>}<span class="ot">/${id}`</span><span class="fl">)</span><span class="ot">.delete</span><span class="fl">()</span>
+<span class="ot">        .then</span><span class="fl">((</span><span class="ot">data</span><span class="fl">)</span><span class="ot"> =&gt; {</span>
+<span class="ot">          this.fields = data;</span>
+<span class="ot">          this.notifyObservers</span><span class="fl">(</span><span class="ot">{event: &quot;delete&quot;, model: this}</span><span class="fl">)</span><span class="ot">;</span>
+<span class="ot">          return data;</span>
+<span class="ot">        }</span><span class="fl">)</span>
+<span class="ot">        .catch</span><span class="fl">((</span><span class="ot">error</span><span class="fl">)</span><span class="ot"> =&gt; error</span><span class="fl">)</span>
+<span class="ot">    }</span>
 <span class="ot">  }</span>
 
 
@@ -1008,19 +1002,17 @@ http://localhost:3000</code></pre>
   <span class="co">/*--- sync ---*/</span>
 
   <span class="fu">fetch</span> () {
-    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Promise</span>((resolve, reject) =&gt; {
-      <span class="kw">new</span> <span class="fu">Request</span>(<span class="kw">this</span>.<span class="fu">url</span>).<span class="fu">get</span>().<span class="fu">then</span>((models) =&gt; {
-        <span class="kw">this</span>.<span class="fu">models</span> = []; <span class="co">/* empty list */</span>
+    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Request</span>(<span class="kw">this</span>.<span class="fu">url</span>).<span class="fu">get</span>().<span class="fu">then</span>((models) =&gt; {
+      <span class="kw">this</span>.<span class="fu">models</span> = []; <span class="co">/* empty list */</span>
 
-        <span class="ot">models</span>.<span class="fu">forEach</span>((fields) =&gt; {
-          <span class="kw">this</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">this</span>.<span class="fu">model</span>(fields));
-        });
+      <span class="ot">models</span>.<span class="fu">forEach</span>((fields) =&gt; {
+        <span class="kw">this</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">this</span>.<span class="fu">model</span>(fields));
+      });
 
-        <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;fetch&quot;</span>, <span class="dt">models</span>:models});
-        <span class="fu">resolve</span>(models);
-      })
-        .<span class="fu">catch</span>((error) =&gt; <span class="fu">reject</span>(error))
-    });
+      <span class="kw">this</span>.<span class="fu">notifyObservers</span>({<span class="dt">event</span>: <span class="st">&quot;fetch&quot;</span>, <span class="dt">models</span>:models});
+      <span class="kw">return</span> models;
+    })
+    .<span class="fu">catch</span>((error) =&gt; error)
 
   }
 
